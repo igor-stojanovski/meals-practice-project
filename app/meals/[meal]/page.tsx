@@ -4,7 +4,8 @@ import Image from "next/image";
 import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata(props: any) {
+  const params = await props.params;
   const meal = getMeal(params.meal) as any;
 
   if (!meal) {
@@ -21,7 +22,8 @@ type Props = {
   params: any;
 };
 
-export default function MealDetails({ params }: Props) {
+export default async function MealDetails(props: Props) {
+  const params = await props.params;
   const meal = getMeal(params.meal) as any;
 
   if (!meal) {
